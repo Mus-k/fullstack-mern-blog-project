@@ -1,5 +1,12 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const User = require("../models/User");
+const bcrypt = require("bcryptjs");
+
+const salt = bcrypt.genSaltSync(10);
+const jwt = require('jsonwebtoken');
+
+const secret = "dnf34j34jfdk344j3cxnnkn";
 
 const mongoose = require("mongoose");
 require("dotenv").config();
