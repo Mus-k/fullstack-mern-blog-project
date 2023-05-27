@@ -24,6 +24,11 @@ mongoose
 app.use(routes);
 // app.listen(7000)
 
+app.get("/api", getInfo);
+app.post("/api/register", postInfo);
+app.post("/api/login", postLogin);
+app.get("/api/profile", getProfile);
+
 app.listen(PORT, () =>
   console.log(`listening to http://localhost:${PORT}/api `)
 );
