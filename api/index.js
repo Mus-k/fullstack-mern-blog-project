@@ -60,6 +60,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/profile", (req, res) => {
+    const {cookies}=req.cookies
   res.json(req.cookies);
 });
 app.listen(PORT, () => console.log(`listening to  http://localhost:${PORT}`));
