@@ -1,18 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import axios from "axios";
 
-export const Navbar = () => {
+
+
+export const Navbar =() => {
+  const [username, setUsername]=useState(null)
   useEffect(() => {
-    axios
-      .get("/api/profile", { withCredentials: true })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  fetch("http://localhost:8080/profile" ,{
+    withCredentials:true
+  }).then(res=>{
+    res.json().then(userInfo=>{
+setUsername(userInfo.username)
+    })
+  })
   }, []);
   return (
     <section className="section-nav">
@@ -23,7 +24,16 @@ export const Navbar = () => {
           </Link>
         </div>
         <nav className="navbar">
-          <button className="btn login">
+          {username && (
+            <>
+            <Link to ='/create'>Create new post</Link>
+            <Link to ='/'>logout</Link></>
+           
+          )}
+          {
+            !username &&(
+              <>
+              <button className="btn login">
             {" "}
             <Link to="/login" className="nav-links">
               Login
@@ -33,7 +43,9 @@ export const Navbar = () => {
             <Link to="/register" className="nav-links">
               Register
             </Link>
-          </button>
+          </button></>
+            )
+          }
         </nav>
       </header>
     </section>

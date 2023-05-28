@@ -12,7 +12,7 @@ export const Login = () => {
 
     axios
       .post(
-        "/api/login",
+        "http://localhost:8080/login",
         {
           username: username,
           password: password,

@@ -9,11 +9,14 @@ export const Register = () => {
     e.preventDefault();
 
     axios
-      .post("/api/register", {
-        username: username,
-        password: password,
-      },
-      { withCredentials: true })
+      .post(
+        "/register",
+        {
+          username: username,
+          password: password,
+        },
+        { withCredentials: true }
+      )
       .then((response) => {
         console.log(response);
       })
