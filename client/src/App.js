@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+
 import { MainNavigation } from "./component/layout/MainNavigation";
+import { PostPage } from "./component/postPage/PostPage";
 import { Home } from "./component/home/Home";
 import { Login } from "./component/routes/Login";
 import { Register } from "./component/routes/Register";
@@ -17,6 +19,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/create" element={<CreatePost />} />
+            <Route path="/post/:id" element={<PostPage />} />
           </Route>
         </Routes>
       </UserContextProvider>

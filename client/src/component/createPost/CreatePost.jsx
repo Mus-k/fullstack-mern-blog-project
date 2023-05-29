@@ -40,22 +40,23 @@ export const CreatePost = () => {
 
   async function createNewPost(event) {
     event.preventDefault();
-    const data =new FormData();
+    const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
     data.set("content", content);
     data.set("file", files[0]);
     console.log(files);
-    const res= await fetch("http://localhost:5000/createPost",{
-        method:"POST",
-        body:data
-    })
-    if(res.ok){
-        setRedirect(true)
+    const res = await fetch("http://localhost:5000/createPost", {
+      method: "POST",
+      body: data,
+      credentials: "include",
+    });
+    if (res.ok) {
+      setRedirect(true);
     }
   }
-  if(redirect){
-    return <Navigate to ={"/"}/>
+  if (redirect) {
+    return <Navigate to={"/"} />;
   }
   return (
     <form onSubmit={createNewPost}>
@@ -71,8 +72,7 @@ export const CreatePost = () => {
         value={summary}
         onChange={(e) => setSummary(e.target.value)}
       />
-      <input type="file" 
-       onChange={(ev)=>setFiles(ev.target.files)}/>
+      <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
       <ReactQuill
         value={content}
         onChange={(newValue) => setContent(newValue)}

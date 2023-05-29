@@ -15,3 +15,7 @@
   section{
     max-width: 1500px;
   }
+
+  .content{
+    color:red;
+  }
