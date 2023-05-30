@@ -4,20 +4,23 @@ import "./LogReg.css";
 export const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [registed, setRegisted] = useState(false);
 
   const register = async (e) => {
     e.preventDefault();
-    
-    const response=await fetch("http://localhost:5000/register", {
+
+    const response = await fetch("http://localhost:5000/register", {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: { "Content-Type": "application/json" },
     });
-    if(!response.ok){
-alert("failed")
+    if (!response.ok) {
+      setRegisted(false);
     } else {
-      alert("succeed")
+      setRegisted(true);
     }
+    setUsername("");
+    setPassword("");
   };
   return (
     <section onSubmit={register} className="register">
@@ -31,10 +34,10 @@ alert("failed")
                 type="text"
                 name="username"
                 value={username}
+                placeholder="username"
                 required
                 onChange={(e) => setUsername(e.target.value)}
               />
-              <label htmlFor="username">username</label>
             </div>
             <div className="inputbox">
               <i className="fa-solid fa-lock"></i>
@@ -42,13 +45,14 @@ alert("failed")
                 type="password"
                 name="password"
                 required
+                placeholder="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-
-              <label htmlFor="password">password</label>
             </div>
-            <button className="loginbtn">Register</button>
+            <button className="loginbtn" disabled={registed}>
+              {registed ? "thanks for the Registration" : "Register"}
+            </button>
           </form>
         </div>
       </div>

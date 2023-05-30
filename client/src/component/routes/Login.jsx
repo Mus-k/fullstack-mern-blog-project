@@ -5,10 +5,23 @@ import { UserContext } from "../../context/UserContext";
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [redirect, setRedirect] = useState(false);
-  const {setUserInfo} = useContext(UserContext);
-  //const [wronginfo, setWrongInfo] = useState(false);
 
+  const [redirect, setRedirect] = useState(false);
+  const { setUserInfo } = useContext(UserContext);
+  const [wronginfo, setWrongInfo] = useState(false);
+
+  const handleChange = (event) => {
+    setPassword(event.target.value);
+    if (event.target.value) {
+      setWrongInfo(false);
+    }
+  };
+  const handleChanges = (event) => {
+    setUsername(event.target.value);
+    if (event.target.value) {
+      setWrongInfo(false);
+    }
+  };
   const login = async (e) => {
     e.preventDefault();
     const response = await fetch("http://localhost:5000/login", {
@@ -19,12 +32,15 @@ export const Login = () => {
     });
     if (response.ok) {
       response.json().then((userInfo) => {
-        setUserInfo(userInfo)
+        setUserInfo(userInfo);
         setRedirect(true);
       });
     } else {
-      alert("wrong credentials");
+      setWrongInfo(true);
     }
+
+    setUsername("");
+    setPassword("");
   };
   if (redirect) {
     return <Navigate to={"/"} />;
@@ -41,10 +57,10 @@ export const Login = () => {
                 type="text"
                 name="username"
                 value={username}
+                placeholder="username"
                 required
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={handleChanges}
               />
-              <label htmlFor="username">username</label>
             </div>
             <div className="inputbox">
               <i className="fa-solid fa-lock"></i>
@@ -53,14 +69,16 @@ export const Login = () => {
                 name="password"
                 required
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                placeholder="password"
+                onChange={handleChange}
               />
-
-              <label htmlFor="password">password</label>
             </div>
             <button className="loginbtn">Login</button>
-            {/* { wronginfo && <p>please check your 
-            username or password</p>} */}
+            {wronginfo && (
+              <p style={{ color: "red", textAlign: "center" }}>
+                please check your username and password
+              </p>
+            )}
           </form>
         </div>
       </div>

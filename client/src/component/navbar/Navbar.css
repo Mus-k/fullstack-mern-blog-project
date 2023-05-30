@@ -1,6 +1,7 @@
 .section-nav {
-  max-width: 1500px;
-  margin: 50px 150px;
+   background-color: #ffffff;
+ margin-top: 50px;
+ 
 }
 .header {
   display: flex;
@@ -10,8 +11,10 @@
 
 .logo {
   padding: 20px;
+  font-family: sans-serif;
   font-size: 40px;
-  color: #2894ff;
+ color: #252839;
+  /* color: #2894ff; */
   text-decoration: none;
 }
 
@@ -21,14 +24,15 @@
   align-items: center;
 }
 .btn {
-  margin: 0px 25px;
+  margin: 0px 7px;
 }
 .registerbtn,
 .login {
-  padding: 3px 12px;
+  padding: 3px 5px;
   font-size: 22px;
   border-radius: 5px;
-  background: #2894ff;
+  background: #252839;
+  /* background: #2894ff; */
   transition: all 0.3s ease-in-out;
 }
 .nav-links {

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useParams } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import { formatISO9075 } from "date-fns";
+import { UserContext } from "../../context/UserContext";
 
 export const PostPage = () => {
   const [postInfo, setPostInfo] = useState(null);
+  const { userInfo } = useContext(UserContext);
   const { id } = useParams();
   useEffect(() => {
     fetch(`http://localhost:5000/post/${id}`).then((response) => {
@@ -15,9 +16,6 @@ export const PostPage = () => {
     });
   }, []);
 
-
-
- 
   if (!postInfo) return "";
   return (
     <section className="post-section">
@@ -39,12 +37,21 @@ export const PostPage = () => {
                 {postInfo.author.username}
               </div>
             </p>
+            {userInfo.id === postInfo.author._id && (
+              <div>
+                <Link to={`/edit/${postInfo._id}`}>Edit </Link>
+              </div>
+            )}
             <p className="dateP">
               date: <time>{formatISO9075(new Date(postInfo.createdAt))}</time>
             </p>
           </div>
           <p className="blog-text">{postInfo.summary}</p>
-          <div className="content" dangerouslySetInnerHTML={{ __html: postInfo.content }} />
+
+          {/* <div
+            className="content"
+            dangerouslySetInnerHTML={{ __html: postInfo.content }}
+          /> */}
         </div>
       </div>
     </section>

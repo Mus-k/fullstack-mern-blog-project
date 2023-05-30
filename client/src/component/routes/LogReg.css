@@ -2,10 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../../assets/images/5298787.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+
 height: 80vh;}
 .form-box {
   position: relative;
@@ -31,21 +28,6 @@ height: 80vh;}
   margin: 30px 0;
   width: 320px;
   border-bottom: 2px solid #ffff;
-}
-.inputbox label {
-  position: absolute;
-  top: 50%;
-  left: 5px;
-  transform: translateY(-50%);
-  color: #ffff;
-  font-size: 1em;
-  pointer-events: none;
-  transition: 0.5s;
-}
-
-input:focus ~ label,
-input:focus ~ :valid {
-  top: -5px;
 }
 
 .inputbox input {

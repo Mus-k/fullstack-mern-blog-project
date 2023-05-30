@@ -8,8 +8,15 @@
   }
   
   body{
-    background: #252839;
+    /* background: #252839; */
+    background-color: white;
     color: #2894ff;
+  }
+
+  .main{
+    padding: 10px;
+    max-width: 800px;
+    margin: 0 auto;
   }
   
   section{

@@ -14,20 +14,26 @@ export const Post = ({
   return (
     <section className="post-section">
       <div className="post">
-        <Link to={`/post/${_id}`}>
-          <img src={"http://localhost:5000/" + cover} alt="post" width="100%" />
-        </Link>
+        <div className="image">
+          <Link className="image" to={`/post/${_id}`}>
+            <img
+              src={"http://localhost:5000/" + cover}
+              alt="post"
+             
+            />
+          </Link>
+        </div>
 
         <div className="blog-info">
-          <Link to={`/post/${_id}`}>
+          <Link className="blog-title" to={`/post/${_id}`}>
             <h2 className="blog-title">{title}</h2>
           </Link>
 
           <div className="info">
             <p className="authorP">
-              <Link to="/author" className="author">
+              <span> posted by, </span>
+              <Link to={`/post/${_id}`} className="author">
                 {" "}
-                <span> posted by, </span>
                 {author.username}
               </Link>
             </p>

@@ -43,10 +43,10 @@ export const CreatePost = () => {
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
-    data.set("content", content);
+    // data.set("content", content);
     data.set("file", files[0]);
     console.log(files);
-    const res = await fetch("http://localhost:5000/createPost", {
+    const res = await fetch("http://localhost:5000/post", {
       method: "POST",
       body: data,
       credentials: "include",
@@ -66,19 +66,20 @@ export const CreatePost = () => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <input
+      <textarea value={summary} onChange={(e) => setSummary(e.target.value)} />
+      {/* <input
         type="summary"
         placeholder={"summary"}
         value={summary}
         onChange={(e) => setSummary(e.target.value)}
-      />
+      /> */}
       <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
-      <ReactQuill
+      {/* <ReactQuill
         value={content}
         onChange={(newValue) => setContent(newValue)}
         modules={modules}
         formats={formats}
-      />
+      /> */}
       <button style={{ marginTop: "5px" }}>Create your post</button>
     </form>
   );
