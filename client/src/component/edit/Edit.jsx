@@ -1,41 +1,11 @@
 import React, { useState, useEffect } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import { motion } from "framer-motion";
 import { Navigate, useParams } from "react-router-dom";
-
-const modules = {
-  toolbar: [
-    [{ header: [1, 2, false] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [
-      { list: "ordered" },
-      { list: "bullet" },
-      { indent: "-1" },
-      { indent: "+1" },
-    ],
-    ["link", "image"],
-    ["clean"],
-  ],
-};
-const formats = [
-  "header",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image",
-];
 
 export const Edit = () => {
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
-  const [content, setContent] = useState("");
   const [files, setFiles] = useState("");
   const [redirect, setRedirect] = useState(false);
 
@@ -43,8 +13,7 @@ export const Edit = () => {
     fetch("http://localhost:5000/post/" + id).then((response) => {
       response.json().then((postInfo) => {
         setTitle(postInfo.title);
-        setSummary(postInfo.content);
-        setContent(postInfo.summary);
+        setSummary(postInfo.summary);
       });
     });
   }, []);
@@ -54,7 +23,6 @@ export const Edit = () => {
     const data = new FormData();
     data.set("title", title);
     data.set("summary", summary);
-    // data.set("content", content);
     data.set("id", id);
     if (files?.[0]) {
       data.set("file", files?.[0]);
@@ -70,37 +38,42 @@ export const Edit = () => {
     }
   }
   if (redirect) {
-    return <Navigate to={"/post/" +id }/>;
+    return <Navigate to={"/post/" + id} />;
   }
   return (
     <div>
       {" "}
-      <form onSubmit={updatePost}>
+      <motion.form
+        className="createForm"
+        onSubmit={updatePost}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        variants={{
+          hidden: { opacity: 0, y: "100%" },
+          visible: { opacity: 1, y: "0%" },
+        }}
+      >
         <input
+          className="createInput"
           type="title"
           placeholder={"title"}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        {/* <input
-          type="summary"
-          placeholder={"summary"}
+
+        <textarea
+          className="textarea"
+          cols={14}
+          rows={10}
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
-        /> */}
-         <textarea
-        value={summary}
-        onChange={(e) => setSummary(e.target.value)}
         />
-
-        {/* <ReactQuill
-          value={content}
-          onChange={(newValue) => setContent(newValue)}
-          modules={modules}
-          formats={formats}
-        /> */}
-        <button style={{ marginTop: "5px" }}>edit your post</button>
-      </form>
+        <button className="createBtn" style={{ marginTop: "5px" }}>
+          edit your post
+        </button>
+      </motion.form>
     </div>
   );
 };

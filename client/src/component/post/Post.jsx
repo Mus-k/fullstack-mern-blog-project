@@ -2,25 +2,26 @@ import React from "react";
 import "./Post.css";
 import { formatISO9075 } from "date-fns";
 import { Link } from "react-router-dom";
+
 export const Post = ({
   _id,
   title,
   summary,
   cover,
   author,
-  content,
   createdAt,
 }) => {
   return (
-    <section className="post-section">
+    <section
+      className="post-section"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <div className="post">
         <div className="image">
           <Link className="image" to={`/post/${_id}`}>
-            <img
-              src={"http://localhost:5000/" + cover}
-              alt="post"
-             
-            />
+            <img src={"http://localhost:5000/" + cover} alt="post" />
           </Link>
         </div>
 

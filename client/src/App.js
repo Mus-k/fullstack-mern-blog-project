@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
+
 
 import { MainNavigation } from "./component/layout/MainNavigation";
 import { PostPage } from "./component/postPage/PostPage";
@@ -9,6 +9,7 @@ import { Register } from "./component/routes/Register";
 import { UserContextProvider } from "./context/UserContext";
 import { CreatePost } from "./component/createPost/CreatePost";
 import { Edit } from "./component/edit/Edit";
+
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           </Route>
         </Routes>
       </UserContextProvider>
+    
     </div>
   );
 }

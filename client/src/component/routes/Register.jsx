@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { motion } from "framer-motion";
 import "./LogReg.css";
 export const Register = () => {
   const [username, setUsername] = useState("");
@@ -24,7 +24,17 @@ export const Register = () => {
   };
   return (
     <section onSubmit={register} className="register">
-      <div className="form-box">
+      <motion.div
+        className="form-box"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        variants={{
+          hidden: { opacity: 0, y: 100 },
+          visible: { opacity: 1, y: 0 },
+        }}
+      >
         <div className="form-value">
           <form className="" action="">
             <h2 className="regTitle">Register</h2>
@@ -55,7 +65,7 @@ export const Register = () => {
             </button>
           </form>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

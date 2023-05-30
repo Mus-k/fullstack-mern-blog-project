@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import "react-quill/dist/quill.snow.css";
+import {motion} from 'framer-motion';
 import { formatISO9075 } from "date-fns";
 import { UserContext } from "../../context/UserContext";
 
@@ -18,8 +18,17 @@ export const PostPage = () => {
 
   if (!postInfo) return "";
   return (
-    <section className="post-section">
-      <div className="post">
+    <section className="post-section" style={{ marginTop: "70px" }}
+  >
+      <motion.div className="post"
+       initial="hidden"
+       whileInView="visible"
+       viewport={{ once: true }}
+       transition={{ duration: 1 }}
+       variants={{
+         hidden: { opacity: 0, y: 100 },
+         visible: { opacity: 1, y: 0 },
+       }}>
         <img
           src={`http://localhost:5000/${postInfo.cover}`}
           alt="post"
@@ -38,8 +47,10 @@ export const PostPage = () => {
               </div>
             </p>
             {userInfo.id === postInfo.author._id && (
-              <div>
-                <Link to={`/edit/${postInfo._id}`}>Edit </Link>
+              <div className="edit">
+                <Link to={`/edit/${postInfo._id}`} className="edit">
+                  <i className="fa-regular fa-pen-to-square"></i>Edit{" "}
+                </Link>
               </div>
             )}
             <p className="dateP">
@@ -47,13 +58,8 @@ export const PostPage = () => {
             </p>
           </div>
           <p className="blog-text">{postInfo.summary}</p>
-
-          {/* <div
-            className="content"
-            dangerouslySetInnerHTML={{ __html: postInfo.content }}
-          /> */}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

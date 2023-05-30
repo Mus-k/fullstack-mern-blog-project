@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
-//import { Navigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
+
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -47,7 +49,17 @@ export const Login = () => {
   }
   return (
     <section className="loginSection">
-      <div className="form-box">
+      <motion.div
+        className="form-box"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+        variants={{
+          hidden: { opacity: 0, x: -100 },
+          visible: { opacity: 1, x: 0 },
+        }}
+      >
         <div className="form-value">
           <form onSubmit={login} className="" action="">
             <h2 className="regTitle">Login</h2>
@@ -81,7 +93,7 @@ export const Login = () => {
             )}
           </form>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -44,8 +44,8 @@ export const Navbar = () => {
           {username && (
             <>
               <Link to="/create"
-        className="btn login nav-links"     >Create  post</Link>
-              <Link to="/" className="btn login nav-links" onClick={logout}>
+        className="btn login nav-links crbtn">Create  post</Link>
+              <Link to="/" className="btn login nav-links crbtn" onClick={logout}>
                 logout
               </Link>
             </>
@@ -65,8 +65,10 @@ export const Navbar = () => {
               </button>
             </>
           )}
+         
         </nav>
       </header>
+      <hr className="hr" style={{height:'2px', marginTop:"3px",color:"red", width:"100%"}}/>
     </section>
   );
 };

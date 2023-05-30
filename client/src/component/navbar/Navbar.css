@@ -1,7 +1,7 @@
 .section-nav {
    background-color: #ffffff;
  margin-top: 50px;
- 
+ position: sticky;
 }
 .header {
   display: flex;
@@ -46,4 +46,11 @@
 .login:hover {
   background: #ffffff;
 
+}
+
+
+@media screen and (max-width:410px){
+  .crbtn{
+    font-size: 15px;
+  }
 }
