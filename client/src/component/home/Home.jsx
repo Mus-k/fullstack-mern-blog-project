@@ -37,8 +37,9 @@ export const Home = () => {
         Welcome to the open blog post
       </h2>
 
-      {posts.length > 0 &&
-        posts.map((post) => <Post key={post.id} {...post} />)}
+      {posts.length > 0?
+        posts.map((post) => <Post key={post.id} {...post} />):
+        <div style={{textAlign:"center", fontSize:"50px"}}>loading .....</div>}
     </motion.div>
     
     </div>

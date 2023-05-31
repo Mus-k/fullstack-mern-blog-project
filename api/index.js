@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 mongoose.connect(
 
-  "mongodb+srv://kamaramusa56:kYDWzJ44rTYN6U0B@cluster0.wwzk2nx.mongodb.net/?retryWrites=true&w=majority"
+  "mongodb+srv://kamaramusa56:7rKSA9X1FXDIfLL9@cluster0.wwzk2nx.mongodb.net/?retryWrites=true&w=majority"
 );
 
 app.get("/", (req, res) => {
